@@ -4,14 +4,14 @@
 #define XF86MonBrightnessUp 0x1008ff02
 
 /* appearance */
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
+static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int default_border = 0;  // to switch back to default border after dynamic border resizing via keybinds
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int gappih    = 0;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 0;       /* vert inner gap between windows */
-static const unsigned int gappoh    = 0;       /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov    = 0;       /* vert outer gap between windows and screen edge */
-static       int smartgaps          = 1;        /* 1 means no outer gap when there is only one window */
+static const unsigned int gappoh    = 8;       /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov    = 8;       /* vert outer gap between windows and screen edge */
+static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails,display systray on the 1st monitor,False: display systray on last monitor*/
@@ -36,28 +36,28 @@ static const int colorfultag        = 1;  /* 0 means use SchemeSel for selected 
 // theme
 #include "themes/nord.h"
 
-static const char *colors[][3]      = {
-    /*               fg         bg         border   */
-    [SchemeNorm]       = { gray3, black, gray2 },
-    [SchemeSel]        = { gray4, blue,  blue  },
-    [TabSel]           = { blue, gray2,  black  },
-    [TabNorm]          = { gray3, black, black },
-    [SchemeTag]        = { gray3, black, black },
-    [SchemeTag1]       = { red,  black, black },
-    [SchemeTag2]       = { blue,   black, black },
-    [SchemeTag3]       = { orange, black,black },
-    [SchemeTag4]       = { green, black, black },
-    [SchemeTag5]       = { pink,  black, black },
-    [SchemeLayout]     = { green, black, black }, 
-    [SchemeBtnPrev]    = { green, black, black }, 
-    [SchemeBtnNext]    = { yellow, black, black }, 
-    [SchemeBtnClose]   = { red, black, black }, 
+static const char *colors[][3] = {
+  /*               fg         bg         border   */
+  [SchemeNorm]       = { gray3, black, gray2 },
+  [SchemeSel]        = { gray4, blue,  blue  },
+  [TabSel]           = { blue, gray2,  black  },
+  [TabNorm]          = { gray3, black, black },
+  [SchemeTag]        = { gray3, black, black },
+  [SchemeTag1]       = { red,  black, black },
+  [SchemeTag2]       = { blue,   black, black },
+  [SchemeTag3]       = { orange, black,black },
+  [SchemeTag4]       = { green, black, black },
+  [SchemeTag5]       = { pink,  black, black },
+  [SchemeLayout]     = { green, black, black },
+  [SchemeBtnPrev]    = { green, black, black },
+  [SchemeBtnNext]    = { yellow, black, black },
+  [SchemeBtnClose]   = { red, black, black },
 };
 
 /* tagging */
 static char *tags[] = {" ", " ", " ", " "};
 
-static const int tagschemes[] = { SchemeTag1, SchemeTag2, SchemeTag3,SchemeTag4, SchemeTag5 };
+static const int tagschemes[] = { SchemeTag1, SchemeTag2, SchemeTag3,SchemeTag4 };
 
 static const unsigned int ulinepad	= 5;	/* horizontal padding between the underline and tag */
 static const unsigned int ulinestroke	= 2;	/* thickness / height of the underline */
@@ -86,7 +86,7 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 
 static const Layout layouts[] = {
     /* symbol     arrange function */
-    { "[]=",      tile },    /* first entry is default */
+    { "[ ]=",      tile },    /* first entry is default */
     { "[M]",      monocle },
     { "[@]",      spiral },
     { "[\\]",     dwindle },
@@ -113,27 +113,31 @@ static const Layout layouts[] = {
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
+#define TERMV(cmd) { .v = (const char*[]){ "kitty", "-e", "vim", cmd, NULL } }
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", NULL };
-static const char *termcmd[]  = {  "kitty", NULL }; // change this to your term
+static const char *term[]  = {  "kitty", NULL }; // change this to your term
+static const char *browser[]  = {  "brave", NULL }; // default browser
 static const char *rofi[] = {"rofi", "-show", "drun", NULL };
 static const char *xi[] = {"xbacklight", "-inc", "7", NULL};
 static const char *xd[] = {"xbacklight", "-dec", "7", NULL};
-static const char *setwall[] = {"feh --bg-fill --randomize $WALLPAPERS", NULL};
+static const char *wallset[] = {"feh", "--bg-fill", "--randomize","/home/creator54/wallpapers", NULL};
 
 static Key keys[] = {
     /* modifier                     key        function        argument */
     { MODKEY,                       XK_c,      spawn,          {.v = rofi } },
-    { MODKEY|ShiftMask,             XK_w,      spawn,      		 {.v = setwall } },
+    { MODKEY|Mod1Mask,              XK_b,      spawn,          {.v = browser } },
+    { MODKEY|Mod1Mask,             	XK_i,      spawn,          TERMV("/home/creator54/.config/dwm/config.def.h") },
+    { MODKEY|ShiftMask,             XK_w,      spawn,          {.v = wallset } },
     // if you dont use st and this script my rm this and uncomment line below it!
-    //{ MODKEY,                       XK_Return, spawn,   SHCMD("~/.local/bin/./st_settings && st")}, 
-    { MODKEY,                       XK_Return, spawn,    {.v = termcmd }},  
-    { MODKEY|ShiftMask,             XK_Return, spawn,    {.v = dmenucmd }},  
+    //{ MODKEY,                       XK_Return, spawn,   SHCMD("~/.local/bin/./st_settings && st")},
+    { MODKEY,                       XK_Return, spawn,    {.v = term }},
+    { MODKEY|ShiftMask,             XK_Return, spawn,    {.v = dmenucmd }},
 
-    {MODKEY | ControlMask, XK_u, spawn, SHCMD("maim | xclip -selection clipboard -t image/png")},
-    {MODKEY, XK_u, spawn,   SHCMD("maim --select | xclip -selection clipboard -t image/png")},
+    {MODKEY|ControlMask, 	   				XK_u, 		 spawn,    SHCMD("maim | xclip -selection clipboard -t image/png")},
+    {MODKEY, 												XK_u, 		 spawn,    SHCMD("maim --select | xclip -selection clipboard -t image/png")},
     {0, XF86MonBrightnessDown, spawn, {.v = xd}},
     {0, XF86MonBrightnessUp, spawn, {.v = xi}},
     { MODKEY,                       XK_b,      togglebar,      {0} },
@@ -176,25 +180,25 @@ static Key keys[] = {
     { MODKEY|ControlMask,           	 XK_t,      togglegaps,     {0} },
     { MODKEY|ControlMask|ShiftMask,    XK_d,      defaultgaps,    {0} },
 
-    { MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
-    { MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-    { MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[1]} },
-    { MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-    { MODKEY|ControlMask,           XK_g,      setlayout,      {.v = &layouts[10]} },
-    { MODKEY|ControlMask|ShiftMask, XK_t,      setlayout,      {.v = &layouts[13]} },
-    { MODKEY,                       XK_space,  setlayout,      {0} },
-    { MODKEY|ControlMask,						XK_comma,  cyclelayout,    {.i = -1 } },
-    { MODKEY|ControlMask,           XK_period, cyclelayout,    {.i = +1 } },
-    { MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
-    { MODKEY,                       XK_f,      togglefullscr,  {0} },
-    { MODKEY,                       XK_0,      view,           {.ui = ~0 } },
-    { MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-    { MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
-    { MODKEY,                       XK_period, focusmon,       {.i = +1 } },
-    { MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
-    { MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-    { MODKEY|ShiftMask,             XK_minus, 		setborderpx,    {.i = -1 } },
-    { MODKEY|ShiftMask,             XK_p, 	        setborderpx,    {.i = +1 } },
+    { MODKEY|ShiftMask,            		 XK_c,      killclient,     {0} },
+    //{ MODKEY,                      		 XK_t,      setlayout,      {.v = &layouts[0]} },
+    //{ MODKEY|ShiftMask,            		 XK_f,      setlayout,      {.v = &layouts[1]} },
+    //{ MODKEY,                      		 XK_m,      setlayout,      {.v = &layouts[2]} },
+    //{ MODKEY|ControlMask,          		 XK_g,      setlayout,      {.v = &layouts[10]} },
+    //{ MODKEY|ControlMask|ShiftMask,		 XK_t,      setlayout,      {.v = &layouts[13]} },
+    //{ MODKEY,                      		 XK_space,  setlayout,      {0} },
+    { MODKEY,													 XK_space, 	cyclelayout,    {.i = -1 } },
+    { MODKEY|ShiftMask,          		 	 XK_space,  cyclelayout,    {.i = +1 } },
+    { MODKEY|ShiftMask,            		 XK_f,   		togglefloating, {0} },
+    { MODKEY,                      		 XK_f,      togglefullscr,  {0} },
+    { MODKEY,                      		 XK_0,      view,           {.ui = ~0 } },
+    { MODKEY|ShiftMask,            		 XK_0,      tag,            {.ui = ~0 } },
+    { MODKEY,                      		 XK_comma,  focusmon,       {.i = -1 } },
+    { MODKEY,                      		 XK_period, focusmon,       {.i = +1 } },
+    { MODKEY|ShiftMask,            		 XK_comma,  tagmon,         {.i = -1 } },
+    { MODKEY|ShiftMask,            		 XK_period, tagmon,         {.i = +1 } },
+    { MODKEY|ShiftMask,            		 XK_minus, 	setborderpx,    {.i = -1 } },
+    { MODKEY|ShiftMask,            		 XK_p, 	    setborderpx,    {.i = +1 } },
    // { MODKEY|ShiftMask,             XK_w, 	        setborderpx,    {.i = default_border } },
 
     TAGKEYS(                        XK_1,                      0)
@@ -215,7 +219,7 @@ static Button buttons[] = {
     { ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
     { ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
     { ClkWinTitle,          0,              Button2,        zoom,           {0} },
-    { ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
+    { ClkStatusText,        0,              Button2,        spawn,          {.v = term } },
 
 		/* Keep movemouse? */
     /* { ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} }, */

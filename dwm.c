@@ -175,8 +175,7 @@ struct Client {
   int basew, baseh, incw, inch, maxw, maxh, minw, minh;
   int bw, oldbw;
   unsigned int tags;
-  int isfixed, iscentered, isfloating, isurgent, neverfocus, oldstate,
-      isfullscreen;
+  int isfixed, iscentered, isfloating, isurgent, neverfocus, oldstate, isfullscreen;
 	int beingmoved;
   Client *next;
   Client *snext;
@@ -2298,10 +2297,8 @@ void propertynotify(XEvent *e) {
 }
 
 void quit(const Arg *arg) {
-  if(arg->i == 0)  system("killall bar");
-
-  else if (arg->i)
-    restart = 1;
+  if(arg->i == 0) system("killall bar");
+  else if (arg->i) restart = 1;
 
 	Monitor *m;
 	Client *c;
@@ -3353,8 +3350,8 @@ void updatesizehints(Client *c) {
 }
 
 void updatestatus(void) {
-  if (!gettextprop(root, XA_WM_NAME, stext, sizeof(stext)))
-    strcpy(stext, "dwm-" VERSION);
+  //if (!gettextprop(root, XA_WM_NAME, stext, sizeof(stext)))
+  //  strcpy(stext, "dwm-" VERSION);
   drawbar(selmon);
   updatesystray();
 }
