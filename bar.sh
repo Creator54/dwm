@@ -57,7 +57,7 @@ mem() {
 
 clock() {
   printf "^c#1e222a^^b#668ee3^ 羽"
-  printf "^c#1e222a^^b#7aa2f7^ $(date '+%a, %I:%M %p') "
+  printf "^c#1e222a^ ^b#7aa2f7^ $(date '+%a, %I:%M %p') "
 }
 
 while true; do
