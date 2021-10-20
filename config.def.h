@@ -115,7 +115,9 @@ static const Layout layouts[] = {
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
-#define TERMV(cmd) { .v = (const char*[]){ "kitty", "-e", "vim", cmd, NULL } }
+#define TERM(cmd) { .v = (const char*[]){ "kitty", "-e", cmd, NULL } }
+#define TERMV(cmd) { .v = (const char*[]){ "kitty", "-e","vim", cmd, NULL } }
+#define TERMF(cmd) { .v = (const char*[]){ "kitty", "-e", "fish","-c", cmd, NULL } }
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
@@ -136,6 +138,7 @@ static Key keys[] = {
     { MODKEY,                       XK_c,      spawn,          {.v = rofi } },
     { MODKEY|Mod1Mask,              XK_b,      spawn,          {.v = browser } },
     { MODKEY|Mod1Mask,             	XK_i,      spawn,          TERMV("/home/creator54/.config/dwm/config.def.h") },
+    { MODKEY|Mod1Mask,             	XK_y,      spawn,          TERMF("yt") },
     { MODKEY|ShiftMask,             XK_w,      spawn,          {.v = wallset } },
     { MODKEY|ControlMask,           XK_r,      spawn,          SHCMD("reboot") },
     { MODKEY|ControlMask,           XK_p,      spawn,          SHCMD("poweroff") },
