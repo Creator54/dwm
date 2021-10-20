@@ -35,6 +35,8 @@ static const int colorfultag        = 1;  /* 0 means use SchemeSel for selected 
 
 // theme
 #include "themes/nord.h"
+#include <X11/XF86keysym.h>
+
 
 static const char *colors[][3] = {
   /*               fg         bg         border   */
@@ -124,6 +126,10 @@ static const char *rofi[] = {"rofi", "-show", "drun", NULL };
 static const char *xi[] = {"xbacklight", "-inc", "7", NULL};
 static const char *xd[] = {"xbacklight", "-dec", "7", NULL};
 static const char *wallset[] = {"feh", "--bg-fill", "--randomize","/home/creator54/wallpapers", NULL};
+static const char *upvol[]   = { "pactl", "set-sink-volume", "0", "+2%",     NULL };
+static const char *downvol[] = { "pactl", "set-sink-volume", "0", "-2%",     NULL };
+static const char *mutevol[] = { "pactl", "set-sink-mute",   "0", "toggle",  NULL };
+
 
 static Key keys[] = {
     /* modifier                     key        function        argument */
@@ -133,7 +139,11 @@ static Key keys[] = {
     { MODKEY|ShiftMask,             XK_w,      spawn,          {.v = wallset } },
     { MODKEY|ControlMask,           XK_r,      spawn,          SHCMD("reboot") },
     { MODKEY|ControlMask,           XK_p,      spawn,          SHCMD("poweroff") },
-    // if you dont use st and this script my rm this and uncomment line below it!
+    { 0,                       XF86XK_AudioLowerVolume, spawn, {.v = downvol } },
+		{ 0,                       XF86XK_AudioMute, 				spawn, {.v = mutevol } },
+		{ 0,                       XF86XK_AudioRaiseVolume, spawn, {.v = upvol   } },
+
+		// if you dont use st and this script my rm this and uncomment line below it!
     //{ MODKEY,                       XK_Return, spawn,   SHCMD("~/.local/bin/./st_settings && st")},
     { MODKEY,                       XK_Return, spawn,    {.v = term }},
     { MODKEY|ShiftMask,             XK_Return, spawn,    {.v = dmenucmd }},

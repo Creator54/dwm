@@ -29,6 +29,15 @@ cpu() {
 #  fi
 #}
 
+#audio
+audio(){
+	if [ "$(pacmd list-sinks | grep muted | xargs | awk '{ print $2}')" = "yes" ]; then
+		printf "^c#7aa2f7^婢  %d"$(amixer sget Master | awk -F"[][]" '/Left/ { print $2 }')
+	else
+		printf "^c#7aa2f7^  %d"$(amixer sget Master | awk -F"[][]" '/Left/ { print $2 }')
+	fi
+}
+
 # battery
 batt() {
 	printf "^c#3b414d^^b#7ec7a2^ "
@@ -42,7 +51,7 @@ brightness() {
     echo -e "$backlight"
   }
 
-  printf "^c#1e222a^^b#70A1C1^   "
+  printf "^c#1e222a^^b#70A1C1^  "
   printf "^c#1e222a^^B#81A1C1^%.0f\n" $(backlight)
 }
 
@@ -74,5 +83,5 @@ while true; do
 
 	[ $SECONDS -eq 0 ] || [ $(($SECONDS % 1800)) -eq 0 ] && fish -c 'ssd-price &>/tmp/ssd' & #$SECONDS=time it has been from script start
 	[ "$(cat /proc/acpi/button/lid/LID0/state | awk -F': ' '{print $2}' | xargs)" = "closed" ] && betterlockscreen -l -tf "%I:%M %p" -t "Don't touch my Machine!"
-	sleep 1 && xsetroot -name "$(ssd-price-now) $(batt) $(brightness) $(cpu) $(mem) $(clock)"
+	sleep 1 && xsetroot -name "$(audio) $(ssd-price-now) $(batt) $(brightness) $(cpu) $(mem) $(clock)"
 done
