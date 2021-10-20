@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+#autostart this for bar info
+
+cpu() {
+  cpu_val=$(grep -o "^[^ ]*" /proc/loadavg)
+
+  printf "^c#3b414d^ ^b#7ec7a2^ CPU"
+  printf "^c#3b414d^ ^b#7ec7a2^ $cpu_val"
+}
+
+#update_icon() {
+#  printf "^c#7ec7a2^ "
+#}
+
+#pkg_updates() {
+#  updates=$(doas xbps-install -un | wc -l) # void
+#  # updates=$(checkupdates | wc -l)   # arch , needs pacman contrib
+#  # updates=$(aptitude search '~U' | wc -l)  # apt (ubuntu,debian etc)
+#
+#  if [ -z "$updates" ]; then
+#    printf "^c#7ec7a2^ Fully Updated"
+#  else
+#    printf "^c#7ec7a2^ $updates"" updates"
+#  fi
+#}
+
+# battery
+batt() {
+	printf "^c#3b414d^^b#7ec7a2^ "
+  printf "^c#3b414d^^b#7ec7a2^ $(acpi | sed "s/,//g" | awk '{if ($3 == "Discharging"){print $4; exit} else {print $4""}}' | tr -d "\n")"
+}
+
+brightness() {
+
+  backlight() {
+    backlight="$(xbacklight -get)"
+    echo -e "$backlight"
+  }
+
+  printf "^c#1e222a^^b#70A1C1^   "
+  printf "^c#1e222a^^B#81A1C1^%.0f\n" $(backlight)
+}
+
+mem() {
+  printf "^c#1e222a^^b#70A1C1^  "
+  printf "^c#1e222a^^b#81A1C1^ $(free -h | awk '/^Mem/ { print $3 }' | sed s/i//g)"
+}
+
+#wlan() {
+#  case "$(cat /sys/class/net/w*/operstate 2>/dev/null)" in
+#  up) printf "^c#3b414d^ ^b#7aa2f7^ 󰤨 ^d^%s" " ^c#7aa2f7^Connected" ;;
+#  down) printf "^c#3b414d^ ^b#7aa2f7^ 󰤭 ^d^%s" " ^c#7aa2f7^Disconnected" ;;
+#  esac
+#}
+
+ssd-price-now() {
+	! [ -e /tmp/ssd ] && touch /tmp/ssd;
+	value=$(cat /tmp/ssd)
+	printf "^c#1e222a^^b#70A1C1^ BX500:"
+	printf "^c#1e222a^ ^b#81A1C1^$value"
+}
+
+clock() {
+  printf "^c#1e222a^^b#668ee3^ 羽"
+  printf "^c#1e222a^ ^b#7aa2f7^ $(date '+%a %b %d, %r') "
+}
+
+while true; do
+
+	[ $SECONDS -eq 0 ] || [ $(($SECONDS % 1800)) -eq 0 ] && fish -c 'ssd-price &>/tmp/ssd' & #$SECONDS=time it has been from script start
+	[ "$(cat /proc/acpi/button/lid/LID0/state | awk -F': ' '{print $2}' | xargs)" = "closed" ] && betterlockscreen -l -tf "%I:%M %p" -t "Don't touch my Machine!"
+	sleep 1 && xsetroot -name "$(ssd-price-now) $(batt) $(brightness) $(cpu) $(mem) $(clock)"
+done

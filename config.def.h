@@ -131,6 +131,8 @@ static Key keys[] = {
     { MODKEY|Mod1Mask,              XK_b,      spawn,          {.v = browser } },
     { MODKEY|Mod1Mask,             	XK_i,      spawn,          TERMV("/home/creator54/.config/dwm/config.def.h") },
     { MODKEY|ShiftMask,             XK_w,      spawn,          {.v = wallset } },
+    { MODKEY|ControlMask,           XK_r,      spawn,          SHCMD("reboot") },
+    { MODKEY|ControlMask,           XK_p,      spawn,          SHCMD("poweroff") },
     // if you dont use st and this script my rm this and uncomment line below it!
     //{ MODKEY,                       XK_Return, spawn,   SHCMD("~/.local/bin/./st_settings && st")},
     { MODKEY,                       XK_Return, spawn,    {.v = term }},
