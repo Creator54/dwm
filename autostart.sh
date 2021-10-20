@@ -40,7 +40,12 @@ audio(){
 
 # battery
 batt() {
-	printf "^c#3b414d^^b#7ec7a2^ "
+	battery_state=$(fish -c 'battery state|sed s/","//')
+	if fish -c "string match -r 'Unknown|Charging' $battery_state &>/dev/null"; then
+		printf "^c#3b414d^^b#7ec7a2^ "
+	else
+			printf "^c#3b414d^^b#7ec7a2^ "
+	fi
   printf "^c#3b414d^^b#7ec7a2^ $(acpi | sed "s/,//g" | awk '{if ($3 == "Discharging"){print $4; exit} else {print $4""}}' | tr -d "\n")"
 }
 
