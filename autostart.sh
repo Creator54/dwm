@@ -3,9 +3,14 @@
 
 cpu() {
   cpu_val=$(grep -o "^[^ ]*" /proc/loadavg)
-
-  printf "^c#3b414d^ ^b#7ec7a2^ CPU"
-  printf "^c#3b414d^ ^b#7ec7a2^ $cpu_val"
+	core_0=$(printf "%d" $(sensors|grep 'Core 0:' | awk '{ print $3}') 2>/dev/null)
+	core_1=$(printf "%d" $(sensors|grep 'Core 1:' | awk '{ print $3}') 2>/dev/null)
+	core_2=$(printf "%d" $(sensors|grep 'Core 2:' | awk '{ print $3}') 2>/dev/null)
+	core_3=$(printf "%d" $(sensors|grep 'Core 3:' | awk '{ print $3}') 2>/dev/null)
+	#total=$((core_0+core_1+core_2+core_3))
+	printf "^c#3b414d^ ^b#7ec7a2^ CPU:"
+	printf "^c#3b414d^^b#7ec7a2^ $cpu_val"
+	printf "/$(($((core_0+core_1+core_2+core_3))/4))°C"
 }
 
 #update_icon() {
