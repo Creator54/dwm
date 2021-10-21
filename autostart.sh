@@ -93,7 +93,7 @@ clock() {
 
 while true; do
 	[ $(($SECONDS % 3)) -eq 0 ] && netspeed
-	[ $SECONDS -eq 10 ] || [ $(($SECONDS % 1800)) -eq 0 ] && fish -c 'ssd-price &>/tmp/ssd' & #$SECONDS=time it has been from script start
+	[ $SECONDS -eq 20 ] || [ $(($SECONDS % 1800)) -eq 0 ] && fish -c 'ssd-price &>/tmp/ssd' & #$SECONDS=time it has been from script start
 	[ "$(cat /proc/acpi/button/lid/LID0/state | awk -F': ' '{print $2}' | xargs)" = "closed" ] && betterlockscreen -l -tf "%I:%M %p" -t "Don't touch my Machine!"
 	sleep 1 && xsetroot -name "$(printf "^c#7aa2f7^龍 $speed") $(audio) $(ssd-price-now) $(batt) $(brightness) $(cpu) $(mem) $(clock)"
 done
