@@ -128,10 +128,11 @@ static const char *rofi[] = {"rofi", "-show", "drun", NULL };
 static const char *xi[] = {"xbacklight", "-inc", "7", NULL};
 static const char *xd[] = {"xbacklight", "-dec", "7", NULL};
 static const char *wallset[] = {"feh", "--bg-fill", "--randomize","/home/creator54/wallpapers", NULL};
-static const char *upvol[]   = { "pactl", "set-sink-volume", "0", "+2%",     NULL };
-static const char *downvol[] = { "pactl", "set-sink-volume", "0", "-2%",     NULL };
-static const char *mutevol[] = { "pactl", "set-sink-mute",   "0", "toggle",  NULL };
-
+static const char *upvol[]   = { "amixer", "set", "Master", "10%+", NULL };
+static const char *downvol[] = { "amixer", "set", "Master", "10%-", NULL };
+static const char *mutevol[] = { "amixer", "set", "Master", "toggle",  NULL };
+static const char *hibernate[] = { "systemctl", "hibernate", NULL };
+static const char *screenlock[] = { "betterlockscreen", "-l", NULL };
 
 static Key keys[] = {
     /* modifier                     key        function        argument */
@@ -142,6 +143,9 @@ static Key keys[] = {
     { MODKEY|ShiftMask,             XK_w,      spawn,          {.v = wallset } },
     { MODKEY|ControlMask,           XK_r,      spawn,          SHCMD("reboot") },
     { MODKEY|ControlMask,           XK_p,      spawn,          SHCMD("poweroff") },
+    { MODKEY|ControlMask,           XK_h,      spawn,          {.v = hibernate } },
+    { MODKEY|ControlMask,           XK_h,      spawn,          {.v = screenlock } },
+    { MODKEY, 					            XK_l,      spawn,          {.v = screenlock } },
     { 0,                       XF86XK_AudioLowerVolume, spawn, {.v = downvol } },
 		{ 0,                       XF86XK_AudioMute, 				spawn, {.v = mutevol } },
 		{ 0,                       XF86XK_AudioRaiseVolume, spawn, {.v = upvol   } },
