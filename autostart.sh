@@ -79,10 +79,11 @@ netspeed(){
 }
 
 ssd-price-now() {
-	! [ -e /tmp/ssd ] && touch /tmp/ssd;
 	value=$(cat /tmp/ssd)
-	printf "^c#1e222a^^b#70A1C1^ BX500:"
-	printf "^c#1e222a^ ^b#81A1C1^$value"
+	if test $(echo $value| rev | cut -c4- |rev) -gt 0;then
+		printf "^c#1e222a^^b#70A1C1^ BX500:"
+		printf "^c#1e222a^ ^b#81A1C1^$value"
+	fi
 }
 
 clock() {
@@ -92,7 +93,7 @@ clock() {
 
 while true; do
 	[ $(($SECONDS % 3)) -eq 0 ] && netspeed
-	[ $SECONDS -eq 0 ] || [ $(($SECONDS % 1800)) -eq 0 ] && fish -c 'ssd-price &>/tmp/ssd' & #$SECONDS=time it has been from script start
+	[ $SECONDS -eq 10 ] || [ $(($SECONDS % 1800)) -eq 0 ] && fish -c 'ssd-price &>/tmp/ssd' & #$SECONDS=time it has been from script start
 	[ "$(cat /proc/acpi/button/lid/LID0/state | awk -F': ' '{print $2}' | xargs)" = "closed" ] && betterlockscreen -l -tf "%I:%M %p" -t "Don't touch my Machine!"
 	sleep 1 && xsetroot -name "$(printf "^c#7aa2f7^龍 $speed") $(audio) $(ssd-price-now) $(batt) $(brightness) $(cpu) $(mem) $(clock)"
 done
