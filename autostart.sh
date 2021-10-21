@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 #autostart this for bar info
 
+speed=0
+
 cpu() {
   cpu_val=$(grep -o "^[^ ]*" /proc/loadavg)
 	core_0=$(printf "%d" $(sensors|grep 'Core 0:' | awk '{ print $3}') 2>/dev/null)
@@ -32,9 +34,9 @@ cpu() {
 #audio
 audio(){
 	if [ "$(pacmd list-sinks | grep muted | xargs | awk '{ print $2}')" = "yes" ]; then
-		printf "^c#7aa2f7^婢  %d"$(amixer sget Master | awk -F"[][]" '/Left/ { print $2 }')
+		printf "^c#7aa2f7^婢 %d"$(amixer sget Master | awk -F"[][]" '/Left/ { print $2 }')
 	else
-		printf "^c#7aa2f7^  %d"$(amixer sget Master | awk -F"[][]" '/Left/ { print $2 }')
+		printf "^c#7aa2f7^ %d"$(amixer sget Master | awk -F"[][]" '/Left/ { print $2 }')
 	fi
 }
 
@@ -46,7 +48,7 @@ batt() {
 	else
 			printf "^c#3b414d^^b#7ec7a2^ "
 	fi
-  printf "^c#3b414d^^b#7ec7a2^ $(acpi | sed "s/,//g" | awk '{if ($3 == "Discharging"){print $4; exit} else {print $4""}}' | tr -d "\n")"
+  printf "^c#3b414d^^b#7ec7a2^ $(acpi | sed "s/,//g" | awk '{if ($3 == "Discharging"){print $4; exit} else {print $4""}}' | tr -d "\n")%"
 }
 
 brightness() {
@@ -72,6 +74,10 @@ mem() {
 #  esac
 #}
 
+netspeed(){
+	speed=$(fish -c "traffic wlp3s0 | tail -n 1 | cut -d' ' -f 3")
+}
+
 ssd-price-now() {
 	! [ -e /tmp/ssd ] && touch /tmp/ssd;
 	value=$(cat /tmp/ssd)
@@ -85,8 +91,8 @@ clock() {
 }
 
 while true; do
-
+	[ $(($SECONDS % 3)) -eq 0 ] && netspeed
 	[ $SECONDS -eq 0 ] || [ $(($SECONDS % 1800)) -eq 0 ] && fish -c 'ssd-price &>/tmp/ssd' & #$SECONDS=time it has been from script start
 	[ "$(cat /proc/acpi/button/lid/LID0/state | awk -F': ' '{print $2}' | xargs)" = "closed" ] && betterlockscreen -l -tf "%I:%M %p" -t "Don't touch my Machine!"
-	sleep 1 && xsetroot -name "$(audio) $(ssd-price-now) $(batt) $(brightness) $(cpu) $(mem) $(clock)"
+	sleep 1 && xsetroot -name "$(printf "^c#7aa2f7^龍 $speed") $(audio) $(ssd-price-now) $(batt) $(brightness) $(cpu) $(mem) $(clock)"
 done
