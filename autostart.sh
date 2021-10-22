@@ -33,7 +33,7 @@ cpu() {
 
 #audio
 audio(){
-	if [ "$(pacmd list-sinks | grep muted | xargs | awk '{ print $2}')" = "yes" ]; then
+	if [ "$(amixer get Master toggle | xargs | awk '{print $NF}')" = "[off]" ]; then
 		printf "^c#7aa2f7^婢 %d"$(amixer sget Master | awk -F"[][]" '/Left/ { print $2 }')
 	else
 		printf "^c#7aa2f7^ %d"$(amixer sget Master | awk -F"[][]" '/Left/ { print $2 }')

@@ -88,20 +88,20 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 
 static const Layout layouts[] = {
     /* symbol     arrange function */
-    { "[]=",      tile },    /* first entry is default */
+    { "===",      bstackhoriz }, // start format
+    { "[]=",      tile },
     { "[M]",      monocle },
-    { "[@]",      spiral },
-    { "[\\]",     dwindle },
+    //{ "[@]",      spiral },
+    //{ "[\\]",     dwindle },
     { "H[]",      deck },
-    { "TTT",      bstack },
-    { "===",      bstackhoriz },
-    { "HHH",      grid },
-    { "###",      nrowgrid },
-    { "---",      horizgrid },
-    { ":::",      gaplessgrid },
+    //{ "TTT",      bstack },
+    //{ "HHH",      grid },
+    //{ "###",      nrowgrid },
+    //{ "---",      horizgrid },
+    //{ ":::",      gaplessgrid },
     { "|M|",      centeredmaster },
-    { ">M>",      centeredfloatingmaster },
-    { "|+|",      tatami },
+    //{ ">M>",      centeredfloatingmaster },
+    //{ "|+|",      tatami },
     { "><>",      NULL },    /* no layout function means floating behavior */
 };
 
@@ -115,7 +115,7 @@ static const Layout layouts[] = {
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
-#define TERM(cmd) { .v = (const char*[]){ "kitty", "-e", cmd, NULL } }
+#define TERM(cmd,cmd1) { .v = (const char*[]){ "kitty", "-e", cmd,cmd1, NULL } }
 #define TERMV(cmd) { .v = (const char*[]){ "kitty", "-e","vim", cmd, NULL } }
 #define TERMF(cmd) { .v = (const char*[]){ "kitty", "-e", "fish","-c", cmd, NULL } }
 
@@ -135,14 +135,14 @@ static const char *hibernate[] = { "systemctl", "hibernate", NULL };
 static const char *screenlock[] = { "betterlockscreen", "-l", NULL };
 static const char *screenkey[] = { "screenkey", "--no-systray", "-t", "0.4", "--opacity", "0.0", NULL };
 static const char *killscreenkey[] = { "pkill", "screenkey", NULL };
-
+static const char *screenshot[] = { "flameshot", "gui", NULL};
 
 static Key keys[] = {
     /* modifier                     key        function        argument */
     { MODKEY,                       XK_c,      spawn,          {.v = rofi } },
     { MODKEY|Mod1Mask,              XK_b,      spawn,          {.v = browser } },
     { MODKEY|Mod1Mask,             	XK_i,      spawn,          TERMV("/home/creator54/.config/dwm/config.def.h") },
-    { MODKEY|Mod1Mask,             	XK_n,      spawn,          TERM("nnn") },
+    { MODKEY|Mod1Mask,             	XK_n,      spawn,          TERM("nnn","-cEFnQrux") },
     { MODKEY|Mod1Mask,             	XK_k,      spawn,          {.v = killscreenkey } },
     { MODKEY|Mod1Mask,             	XK_a,      spawn,          {.v = screenkey } },
     { MODKEY|Mod1Mask,             	XK_y,      spawn,          TERMF("yt") },
@@ -152,6 +152,7 @@ static Key keys[] = {
     { MODKEY|ControlMask,           XK_h,      spawn,          {.v = hibernate } },
     { MODKEY|ControlMask,           XK_h,      spawn,          {.v = screenlock } },
     { MODKEY, 					            XK_l,      spawn,          {.v = screenlock } },
+    { 0,                       			XK_Print,	 spawn, 				 {.v = screenshot } },
     { 0,                       XF86XK_AudioLowerVolume, spawn, {.v = downvol } },
 		{ 0,                       XF86XK_AudioMute, 				spawn, {.v = mutevol } },
 		{ 0,                       XF86XK_AudioRaiseVolume, spawn, {.v = upvol   } },
@@ -163,8 +164,8 @@ static Key keys[] = {
 
     {MODKEY|ControlMask, 	   				XK_u, 		 spawn,    SHCMD("maim | xclip -selection clipboard -t image/png")},
     {MODKEY, 												XK_u, 		 spawn,    SHCMD("maim --select | xclip -selection clipboard -t image/png")},
-    {0, XF86MonBrightnessDown, spawn, {.v = xd}},
-    {0, XF86MonBrightnessUp, spawn, {.v = xi}},
+    {0, 														XF86MonBrightnessDown, spawn, {.v = xd}},
+    {0, 														XF86MonBrightnessUp, spawn, {.v = xi}},
     { MODKEY,                       XK_b,      togglebar,      {0} },
     { MODKEY|ControlMask,           XK_w,      tabmode,        { -1 } },
     { MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
