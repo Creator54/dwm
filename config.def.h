@@ -133,12 +133,18 @@ static const char *downvol[] = { "amixer", "set", "Master", "10%-", NULL };
 static const char *mutevol[] = { "amixer", "set", "Master", "toggle",  NULL };
 static const char *hibernate[] = { "systemctl", "hibernate", NULL };
 static const char *screenlock[] = { "betterlockscreen", "-l", NULL };
+static const char *screenkey[] = { "screenkey", "--no-systray", "-t", "0.4", "--opacity", "0.0", NULL };
+static const char *killscreenkey[] = { "pkill", "screenkey", NULL };
+
 
 static Key keys[] = {
     /* modifier                     key        function        argument */
     { MODKEY,                       XK_c,      spawn,          {.v = rofi } },
     { MODKEY|Mod1Mask,              XK_b,      spawn,          {.v = browser } },
     { MODKEY|Mod1Mask,             	XK_i,      spawn,          TERMV("/home/creator54/.config/dwm/config.def.h") },
+    { MODKEY|Mod1Mask,             	XK_n,      spawn,          TERM("nnn") },
+    { MODKEY|Mod1Mask,             	XK_k,      spawn,          {.v = killscreenkey } },
+    { MODKEY|Mod1Mask,             	XK_a,      spawn,          {.v = screenkey } },
     { MODKEY|Mod1Mask,             	XK_y,      spawn,          TERMF("yt") },
     { MODKEY|ShiftMask,             XK_w,      spawn,          {.v = wallset } },
     { MODKEY|ControlMask,           XK_r,      spawn,          SHCMD("reboot") },
