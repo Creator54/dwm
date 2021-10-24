@@ -114,58 +114,44 @@ static const Layout layouts[] = {
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
-#define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
-#define TERM(cmd,cmd1) { .v = (const char*[]){ "kitty", "-e", cmd,cmd1, NULL } }
-#define TERMV(cmd) { .v = (const char*[]){ "kitty", "-e","vim", cmd, NULL } }
-#define TERMF(cmd) { .v = (const char*[]){ "kitty", "-e", "fish","-c", cmd, NULL } }
+#define SHELL(cmd) { .v = (const char*[]){ "fish", "-c", cmd, NULL } }
+#define TERM(cmd) { .v = (const char*[]){ "kitty", "-e", "fish","-c", cmd, NULL } }
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", NULL };
-static const char *term[]  = {  "kitty", NULL }; // change this to your term
-static const char *browser[]  = {  "brave", NULL }; // default browser
-static const char *rofi[] = {"rofi", "-show", "drun", NULL };
-static const char *xi[] = {"xbacklight", "-inc", "7", NULL};
-static const char *xd[] = {"xbacklight", "-dec", "7", NULL};
-static const char *wallset[] = {"feh", "--bg-fill", "--randomize","/home/creator54/wallpapers", NULL};
-static const char *upvol[]   = { "amixer", "set", "Master", "10%+", NULL };
-static const char *downvol[] = { "amixer", "set", "Master", "10%-", NULL };
-static const char *mutevol[] = { "amixer", "set", "Master", "toggle",  NULL };
-static const char *hibernate[] = { "systemctl", "hibernate", NULL };
-static const char *screenlock[] = { "betterlockscreen", "-l", NULL };
-static const char *screenkey[] = { "screenkey", "--no-systray", "-t", "0.4", "--opacity", "0.0", NULL };
-static const char *killscreenkey[] = { "pkill", "screenkey", NULL };
-static const char *screenshot[] = { "flameshot", "gui", NULL};
+static const char *dmenucmd[] = { "dmenu_run", NULL }; //main launcher
+//just for reminder that things used to be done this way + dmenucmd is used in dwm.c ,
+//will have to change two places everytime i change launcher so better keep this way
 
 static Key keys[] = {
     /* modifier                     key        function        argument */
-    { MODKEY,                       XK_c,      spawn,          {.v = rofi } },
-    { MODKEY|Mod1Mask,              XK_b,      spawn,          {.v = browser } },
-    { MODKEY|Mod1Mask,             	XK_i,      spawn,          TERMV("/home/creator54/.config/dwm/config.def.h") },
-    { MODKEY|Mod1Mask,             	XK_n,      spawn,          TERM("nnn","-cEFnQrux") },
-    { MODKEY|Mod1Mask,             	XK_k,      spawn,          {.v = killscreenkey } },
-    { MODKEY|Mod1Mask,             	XK_a,      spawn,          {.v = screenkey } },
-    { MODKEY|Mod1Mask,             	XK_y,      spawn,          TERMF("yt") },
-    { MODKEY|ShiftMask,             XK_w,      spawn,          {.v = wallset } },
-    { MODKEY|ControlMask,           XK_r,      spawn,          SHCMD("reboot") },
-    { MODKEY|ControlMask,           XK_p,      spawn,          SHCMD("poweroff") },
-    { MODKEY|ControlMask,           XK_h,      spawn,          {.v = hibernate } },
-    { MODKEY|ControlMask,           XK_h,      spawn,          {.v = screenlock } },
-    { MODKEY, 					            XK_l,      spawn,          {.v = screenlock } },
-    { 0,                       			XK_Print,	 spawn, 				 {.v = screenshot } },
-    { 0,                       XF86XK_AudioLowerVolume, spawn, {.v = downvol } },
-		{ 0,                       XF86XK_AudioMute, 				spawn, {.v = mutevol } },
-		{ 0,                       XF86XK_AudioRaiseVolume, spawn, {.v = upvol   } },
+    { MODKEY,                       XK_c,      spawn,          SHELL("exec rofi -show drun") },
+    { MODKEY|Mod1Mask,              XK_b,      spawn,          SHELL("exec $BROWSER") },
+    { MODKEY|Mod1Mask,             	XK_i,      spawn,          TERM("e /home/creator54/.config/dwm/config.def.h") },
+    { MODKEY|Mod1Mask,             	XK_n,      spawn,          TERM("nnn -cEFnQrux") },
+    { MODKEY|Mod1Mask,             	XK_k,      spawn,          SHELL("pkill screenkey") },
+    { MODKEY|Mod1Mask,             	XK_a,      spawn,          SHELL("screenkey --no-systray -t 0.4 --opacity 0.0") },
+    { MODKEY|Mod1Mask,             	XK_y,      spawn,          TERM("yt -l") },
+    { MODKEY|Mod1Mask,             	XK_e,      spawn,     		 SHELL("headset") },
+    { MODKEY|ShiftMask,             XK_w,      spawn,          SHELL("feh --bg-fill --randomize /home/creator54/wallpapers") },
+    { MODKEY|ControlMask,           XK_r,      spawn,          SHELL("reboot") },
+    { MODKEY|ControlMask,           XK_p,      spawn,          SHELL("poweroff") },
+    { MODKEY|ControlMask,           XK_h,      spawn,          SHELL("systemctl hibernate")},
+    { MODKEY|ControlMask,           XK_h,      spawn,          SHELL("betterlockscreen -l") },
+    { MODKEY, 					            XK_l,      spawn,          SHELL("betterlockscreen -l") },
+    { 0,                       			XK_Print,	 spawn, 				 SHELL("flameshot gui") },
+    { 0,                       XF86XK_AudioLowerVolume, spawn, SHELL("amixer set Master 10-") },
+		{ 0,                       XF86XK_AudioMute, 				spawn, SHELL("amixer set Master toggle") },
+		{ 0,                       XF86XK_AudioRaiseVolume, spawn, SHELL("amixer set Master 10+") },
 
 		// if you dont use st and this script my rm this and uncomment line below it!
-    //{ MODKEY,                       XK_Return, spawn,   SHCMD("~/.local/bin/./st_settings && st")},
-    { MODKEY,                       XK_Return, spawn,    {.v = term }},
-    { MODKEY|ShiftMask,             XK_Return, spawn,    {.v = dmenucmd }},
-
-    {MODKEY|ControlMask, 	   				XK_u, 		 spawn,    SHCMD("maim | xclip -selection clipboard -t image/png")},
-    {MODKEY, 												XK_u, 		 spawn,    SHCMD("maim --select | xclip -selection clipboard -t image/png")},
-    {0, 														XF86MonBrightnessDown, spawn, {.v = xd}},
-    {0, 														XF86MonBrightnessUp, spawn, {.v = xi}},
+    //{ MODKEY,                       XK_Return, spawn,   SHELL("~/.local/bin/./st_settings && st")},
+    { MODKEY,                       XK_Return, spawn,    SHELL("kitty") },
+    { MODKEY|ShiftMask,             XK_Return, spawn,    {.v = dmenucmd } },
+    {MODKEY|ControlMask, 	   				XK_u, 		 spawn,    SHELL("maim | xclip -selection clipboard -t image/png")},
+    {MODKEY, 												XK_u, 		 spawn,    SHELL("maim --select | xclip -selection clipboard -t image/png")},
+    {0, 														XF86MonBrightnessDown, spawn, SHELL("xbacklight -dec 10") },
+    {0, 														XF86MonBrightnessUp, spawn, SHELL("xbacklight -inc 10") },
     { MODKEY,                       XK_b,      togglebar,      {0} },
     { MODKEY|ControlMask,           XK_w,      tabmode,        { -1 } },
     { MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
@@ -245,7 +231,7 @@ static Button buttons[] = {
     { ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
     { ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
     { ClkWinTitle,          0,              Button2,        zoom,           {0} },
-    { ClkStatusText,        0,              Button2,        spawn,          {.v = term } },
+    //{ ClkStatusText,        0,              Button2,        spawn,          {.v = term } },
 
 		/* Keep movemouse? */
     /* { ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} }, */
