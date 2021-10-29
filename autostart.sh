@@ -67,6 +67,13 @@ mem() {
   printf "^c#1e222a^^b#81A1C1^ $(free -h | awk '/^Mem/ { print $3 }' | sed s/i//g)"
 }
 
+bt() {
+	if [ $(fish -c "headset|tail -n 1|cut -d' ' -f2") = "successful" ]; then
+		printf "BT:"
+		bluetooth_battery 20:20:10:21:A4:8C | cut -d' ' -f6
+	fi
+}
+
 #wlan() {
 #  case "$(cat /sys/class/net/w*/operstate 2>/dev/null)" in
 #  up) printf "^c#3b414d^ ^b#7aa2f7^ 󰤨 ^d^%s" " ^c#7aa2f7^Connected" ;;
@@ -95,5 +102,5 @@ while true; do
 	[ $(($SECONDS % 3)) -eq 0 ] && netspeed
 	[ $SECONDS -eq 20 ] || [ $(($SECONDS % 1800)) -eq 0 ] && fish -c 'ssd-price &>/tmp/ssd' & #$SECONDS=time it has been from script start
 	[ "$(cat /proc/acpi/button/lid/LID0/state | awk -F': ' '{print $2}' | xargs)" = "closed" ] && betterlockscreen -l -tf "%I:%M %p" -t "Don't touch my Machine!"
-	sleep 1 && xsetroot -name "$(printf "^c#7aa2f7^龍 $speed") $(audio) $(ssd-price-now) $(batt) $(brightness) $(cpu) $(mem) $(clock)"
+	sleep 1 && xsetroot -name "$(printf "^c#7aa2f7^龍 $speed") $(audio) $(bt) $(ssd-price-now) $(batt) $(brightness) $(cpu) $(mem) $(clock)"
 done

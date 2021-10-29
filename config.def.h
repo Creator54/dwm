@@ -140,9 +140,9 @@ static Key keys[] = {
     { MODKEY|ControlMask,           XK_h,      spawn,          SHELL("betterlockscreen -l") },
     { MODKEY, 					            XK_l,      spawn,          SHELL("betterlockscreen -l") },
     { 0,                       			XK_Print,	 spawn, 				 SHELL("flameshot gui") },
-    { 0,                       XF86XK_AudioLowerVolume, spawn, SHELL("amixer set Master 10-") },
+    { 0,                       XF86XK_AudioLowerVolume, spawn, SHELL("amixer set Master 10%-") },
 		{ 0,                       XF86XK_AudioMute, 				spawn, SHELL("amixer set Master toggle") },
-		{ 0,                       XF86XK_AudioRaiseVolume, spawn, SHELL("amixer set Master 10+") },
+		{ 0,                       XF86XK_AudioRaiseVolume, spawn, SHELL("amixer set Master 10%+") },
 
 		// if you dont use st and this script my rm this and uncomment line below it!
     //{ MODKEY,                       XK_Return, spawn,   SHELL("~/.local/bin/./st_settings && st")},
