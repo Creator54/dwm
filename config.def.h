@@ -126,7 +126,7 @@ static const char *dmenucmd[] = { "dmenu_run", NULL }; //main launcher
 static Key keys[] = {
     /* modifier                     key        function        argument */
     { MODKEY,                       XK_c,      spawn,          SHELL("exec rofi -show drun") },
-    { MODKEY|Mod1Mask,              XK_b,      spawn,          SHELL("exec $BROWSER") },
+    { MODKEY|Mod1Mask,              XK_b,      spawn,          SHELL("echo $BROWSER|sh") },
     { MODKEY|Mod1Mask,             	XK_i,      spawn,          TERM("e /home/creator54/.config/dwm/config.def.h") },
     { MODKEY|Mod1Mask,             	XK_n,      spawn,          TERM("nnn -cEFnQrux") },
     { MODKEY|Mod1Mask,             	XK_k,      spawn,          SHELL("pkill screenkey") },
@@ -154,7 +154,7 @@ static Key keys[] = {
     {0, 														XF86MonBrightnessUp, spawn, SHELL("xbacklight -inc 10") },
     { MODKEY,                       XK_b,      togglebar,      {0} },
     { MODKEY|ControlMask,           XK_w,      tabmode,        { -1 } },
-    { MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
+    { MODKEY,                     	XK_Tab, 	 focusstack,     {.i = +1 } },
     { MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
     { MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
     { MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
