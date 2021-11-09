@@ -139,19 +139,21 @@ static Key keys[] = {
     { MODKEY|ControlMask,           XK_h,      spawn,          SHELL("systemctl hibernate")},
     { MODKEY|ControlMask,           XK_h,      spawn,          SHELL("betterlockscreen -l") },
     { MODKEY, 					            XK_l,      spawn,          SHELL("betterlockscreen -l") },
-    { 0,                       			XK_Print,	 spawn, 				 SHELL("flameshot gui") },
-    { 0,                       XF86XK_AudioLowerVolume, spawn, SHELL("amixer set Master 10%-") },
-		{ 0,                       XF86XK_AudioMute, 				spawn, SHELL("amixer set Master toggle") },
-		{ 0,                       XF86XK_AudioRaiseVolume, spawn, SHELL("amixer set Master 10%+") },
+    { 0,  		                      XK_Print,	 spawn, 				 SHELL("flameshot full -p ~/Screenshots/") },
+    { MODKEY,                       XK_Print,	 spawn, 				 SHELL("flameshot gui -p ~/Screenshots/") },
+    { MODKEY|ShiftMask,        			XK_Print,	 spawn, 				 SHELL("flameshot full -c") },
+    { 0,                      			XF86XK_AudioLowerVolume,   spawn, 		SHELL("amixer set Master 10%-") },
+		{ 0,                      		  XF86XK_AudioMute, 				 spawn, 		SHELL("amixer set Master toggle") },
+		{ 0,                      		  XF86XK_AudioRaiseVolume,   spawn, 		SHELL("amixer set Master 10%+") },
 
 		// if you dont use st and this script my rm this and uncomment line below it!
     //{ MODKEY,                       XK_Return, spawn,   SHELL("~/.local/bin/./st_settings && st")},
     { MODKEY,                       XK_Return, spawn,    SHELL("kitty") },
     { MODKEY|ShiftMask,             XK_Return, spawn,    {.v = dmenucmd } },
-    {MODKEY|ControlMask, 	   				XK_u, 		 spawn,    SHELL("maim | xclip -selection clipboard -t image/png")},
-    {MODKEY, 												XK_u, 		 spawn,    SHELL("maim --select | xclip -selection clipboard -t image/png")},
-    {0, 														XF86MonBrightnessDown, spawn, SHELL("xbacklight -dec 10") },
-    {0, 														XF86MonBrightnessUp, spawn, SHELL("xbacklight -inc 10") },
+    { MODKEY|ControlMask, 	   			XK_u, 		 spawn,    SHELL("maim | xclip -selection clipboard -t image/png")},
+    { MODKEY, 											XK_u, 		 spawn,    SHELL("maim --select | xclip -selection clipboard -t image/png")},
+    { 0, 														XF86MonBrightnessDown, spawn, SHELL("xbacklight -dec 10") },
+    { 0, 														XF86MonBrightnessUp, spawn, SHELL("xbacklight -inc 10") },
     { MODKEY,                       XK_b,      togglebar,      {0} },
     { MODKEY|ControlMask,           XK_w,      tabmode,        { -1 } },
     { MODKEY,                     	XK_Tab, 	 focusstack,     {.i = +1 } },
@@ -169,8 +171,8 @@ static Key keys[] = {
     //{ MODKEY,                       XK_Tab,    view,           {0} },
 
     // overall gaps
-    { MODKEY|ControlMask,           XK_i,      incrgaps,       {.i = +1 } },
-    { MODKEY|ControlMask,           XK_d,      incrgaps,       {.i = -1 } },
+    { MODKEY|ControlMask,              XK_i,      incrgaps,       {.i = +1 } },
+    { MODKEY|ControlMask,           	 XK_d,      incrgaps,       {.i = -1 } },
 
     // inner gaps
     { MODKEY|ShiftMask,                XK_i,      incrigaps,      {.i = +1 } },
