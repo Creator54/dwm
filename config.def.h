@@ -142,6 +142,16 @@ static Key keys[] = {
     { 0,  		                      XK_Print,	 spawn, 				 SHELL("flameshot full -p ~/Screenshots/") },
     { MODKEY,                       XK_Print,	 spawn, 				 SHELL("flameshot gui -p ~/Screenshots/") },
     { MODKEY|ShiftMask,        			XK_Print,	 spawn, 				 SHELL("flameshot full -c") },
+
+		//gromit-mpx controls : 
+		//left click ->> red marker
+		//Shift + left click ->> blue marker
+		//Ctrl + left click ->> yellow marker
+    { MODKEY,        								XK_x,	 		 spawn, 				 SHELL("pkill gromit-mpx;or gromit-mpx -a") },
+    { MODKEY, 					       			XK_y, 		 spawn, 				 SHELL("pidof gromit-mpx && gromit-mpx -y") },
+    { MODKEY, 					       			XK_z, 		 spawn, 				 SHELL("pidof gromit-mpx && gromit-mpx -z") },
+    { MODKEY, 					       			XK_v, 		 spawn, 				 SHELL("pidof gromit-mpx && gromit-mpx -v") },
+
     { 0,                      			XF86XK_AudioLowerVolume,   spawn, 		SHELL("amixer set Master 10%-") },
 		{ 0,                      		  XF86XK_AudioMute, 				 spawn, 		SHELL("amixer set Master toggle") },
 		{ 0,                      		  XF86XK_AudioRaiseVolume,   spawn, 		SHELL("amixer set Master 10%+") },
