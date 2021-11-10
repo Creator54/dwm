@@ -127,7 +127,7 @@ static Key keys[] = {
     /* modifier                     key        function        argument */
     { MODKEY,                       XK_c,      spawn,          SHELL("exec rofi -show drun") },
     { MODKEY|Mod1Mask,              XK_b,      spawn,          SHELL("echo $BROWSER|sh") },
-    { MODKEY|Mod1Mask,             	XK_i,      spawn,          TERM("e /home/creator54/.config/dwm/config.def.h") },
+    { MODKEY|Mod1Mask,             	XK_i,      spawn,          TERM("e /home/creator54/.config/nixpkgs/wm/wm-configs/dwm/config.def.h") },
     { MODKEY|Mod1Mask,             	XK_n,      spawn,          TERM("nnn -cEFnQrux") },
     { MODKEY|Mod1Mask,             	XK_k,      spawn,          SHELL("pkill screenkey") },
     { MODKEY|Mod1Mask,             	XK_a,      spawn,          SHELL("screenkey --no-systray -t 0.4 --opacity 0.0") },
