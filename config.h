@@ -125,7 +125,7 @@ static const char *dmenucmd[] = { "dmenu_run", NULL }; //main launcher
 
 static Key keys[] = {
     /* modifier                     key        function        argument */
-    { MODKEY,                       XK_c,      spawn,          SHELL("exec rofi -show drun") },
+    { MODKEY,                       XK_c,      spawn,          SHELL("rofi -show run") },
     { MODKEY|Mod1Mask,              XK_b,      spawn,          SHELL("echo $BROWSER|sh") },
     { MODKEY|Mod1Mask,             	XK_i,      spawn,          TERM("e /home/creator54/.config/nixpkgs/wm/wm-configs/dwm/config.def.h") },
     { MODKEY|Mod1Mask,             	XK_n,      spawn,          TERM("nnn -cEFnQrux") },
@@ -159,7 +159,7 @@ static Key keys[] = {
 		// if you dont use st and this script my rm this and uncomment line below it!
     //{ MODKEY,                       XK_Return, spawn,   SHELL("~/.local/bin/./st_settings && st")},
     { MODKEY,                       XK_Return, spawn,    SHELL("kitty") },
-    { MODKEY|ShiftMask,             XK_Return, spawn,    {.v = dmenucmd } },
+    { MODKEY|ShiftMask,             XK_Return, spawn,    SHELL("rofi -show drun") },
     { MODKEY|ControlMask, 	   			XK_u, 		 spawn,    SHELL("maim | xclip -selection clipboard -t image/png")},
     { MODKEY, 											XK_u, 		 spawn,    SHELL("maim --select | xclip -selection clipboard -t image/png")},
     { 0, 														XF86MonBrightnessDown, spawn, SHELL("xbacklight -dec 10") },
