@@ -152,9 +152,9 @@ static Key keys[] = {
     { MODKEY, 					       			XK_z, 		 spawn, 				 SHELL("pidof gromit-mpx && gromit-mpx -z") },
     { MODKEY, 					       			XK_v, 		 spawn, 				 SHELL("pidof gromit-mpx && gromit-mpx -v") },
 
-    { 0,                      			XF86XK_AudioLowerVolume,   spawn, 		SHELL("amixer set Master 10%-") },
-		{ 0,                      		  XF86XK_AudioMute, 				 spawn, 		SHELL("amixer set Master toggle") },
-		{ 0,                      		  XF86XK_AudioRaiseVolume,   spawn, 		SHELL("amixer set Master 10%+") },
+    { 0,                      			XF86XK_AudioLowerVolume,   spawn, 		SHELL("amixer set Master 10%- && pkill -RTMIN+11 dwmblocks") },
+		{ 0,                      		  XF86XK_AudioMute, 				 spawn, 		SHELL("amixer set Master toggle && pkill -RTMIN+11 dwmblocks") },
+		{ 0,                      		  XF86XK_AudioRaiseVolume,   spawn, 		SHELL("amixer set Master 10%+ && pkill -RTMIN+11 dwmblocks") },
 
 		// if you dont use st and this script my rm this and uncomment line below it!
     //{ MODKEY,                       XK_Return, spawn,   SHELL("~/.local/bin/./st_settings && st")},
@@ -162,8 +162,8 @@ static Key keys[] = {
     { MODKEY|ShiftMask,             XK_Return, spawn,    SHELL("rofi -show drun") },
     { MODKEY|ControlMask, 	   			XK_u, 		 spawn,    SHELL("maim | xclip -selection clipboard -t image/png")},
     { MODKEY, 											XK_u, 		 spawn,    SHELL("maim --select | xclip -selection clipboard -t image/png")},
-    { 0, 														XF86MonBrightnessDown, spawn, SHELL("xbacklight -dec 10") },
-    { 0, 														XF86MonBrightnessUp, spawn, SHELL("xbacklight -inc 10") },
+    { 0, 														XF86MonBrightnessDown, spawn, SHELL("xbacklight -dec 2 && pkill -RTMIN+10 dwmblocks") },
+    { 0, 														XF86MonBrightnessUp, spawn, SHELL("xbacklight -inc 2 && pkill -RTMIN+10 dwmblocks") },
     { MODKEY,                       XK_b,      togglebar,      {0} },
     { MODKEY|ControlMask,           XK_w,      tabmode,        { -1 } },
     { MODKEY,                     	XK_Tab, 	 focusstack,     {.i = +1 } },
