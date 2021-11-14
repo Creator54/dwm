@@ -41,18 +41,17 @@ static const int colorfultag        = 1;  /* 0 means use SchemeSel for selected 
 static const char *colors[][3] = {
   /*               fg         bg         border   */
   [SchemeNorm]       = { gray3, black, gray2 },
-  [SchemeSel]        = { gray4, blue,  blue  },
-  [TabSel]           = { blue, gray2,  black  },
+  [SchemeSel]        = { gray4, blue,  green },
+  [TabSel]           = { blue,  gray2, black },
   [TabNorm]          = { gray3, black, black },
   [SchemeTag]        = { gray3, black, black },
-  [SchemeTag1]       = { red,  black, black },
-  [SchemeTag2]       = { blue,   black, black },
-  [SchemeTag3]       = { orange, black,black },
+  [SchemeTag1]       = { red,   black, black },
+  [SchemeTag2]       = { yellow,black, black },
+  [SchemeTag3]       = { blue,  black, black },
   [SchemeTag4]       = { green, black, black },
-  [SchemeTag5]       = { pink,  black, black },
   [SchemeLayout]     = { green, black, black },
   [SchemeBtnPrev]    = { green, black, black },
-  [SchemeBtnNext]    = { yellow, black, black },
+  [SchemeBtnNext]    = { yellow,black, black },
   [SchemeBtnClose]   = { red, black, black },
 };
 
@@ -126,12 +125,12 @@ static const char *dmenucmd[] = { "dmenu_run", NULL }; //main launcher
 static Key keys[] = {
     /* modifier                     key        function        argument */
     { MODKEY,                       XK_c,      spawn,          SHELL("rofi -show run") },
-    { MODKEY|Mod1Mask,              XK_b,      spawn,          SHELL("echo $BROWSER|sh") },
+    { MODKEY|Mod1Mask,              XK_b,      spawn,          SHELL("$BROWSER") },
     { MODKEY|Mod1Mask,             	XK_i,      spawn,          TERM("e /home/creator54/.config/nixpkgs/wm/wm-configs/dwm/config.def.h") },
     { MODKEY|Mod1Mask,             	XK_n,      spawn,          TERM("nnn -cEFnQrux") },
     { MODKEY|Mod1Mask,             	XK_k,      spawn,          SHELL("pkill screenkey") },
     { MODKEY|Mod1Mask,             	XK_a,      spawn,          SHELL("screenkey --no-systray -t 0.4 --opacity 0.0") },
-    { MODKEY|Mod1Mask,             	XK_y,      spawn,          TERM("yt -l") },
+    { MODKEY|Mod1Mask,             	XK_y,      spawn,          TERM("yt -y -l") },
     { MODKEY|Mod1Mask,             	XK_e,      spawn,     		 SHELL("headset") },
     { MODKEY|ShiftMask,             XK_w,      spawn,          SHELL("feh --bg-fill --randomize /home/creator54/wallpapers") },
     { MODKEY|ControlMask,           XK_r,      spawn,          SHELL("reboot") },
@@ -143,7 +142,7 @@ static Key keys[] = {
     { MODKEY,                       XK_Print,	 spawn, 				 SHELL("flameshot gui -p ~/Screenshots/") },
     { MODKEY|ShiftMask,        			XK_Print,	 spawn, 				 SHELL("flameshot full -c") },
 
-		//gromit-mpx controls : 
+		//gromit-mpx controls :
 		//left click ->> red marker
 		//Shift + left click ->> blue marker
 		//Ctrl + left click ->> yellow marker
@@ -158,8 +157,8 @@ static Key keys[] = {
 
 		// if you dont use st and this script my rm this and uncomment line below it!
     //{ MODKEY,                       XK_Return, spawn,   SHELL("~/.local/bin/./st_settings && st")},
-    { MODKEY,                       XK_Return, spawn,    SHELL("kitty") },
-    { MODKEY|ShiftMask,             XK_Return, spawn,    SHELL("rofi -show drun") },
+    { MODKEY,                       XK_Return, spawn,    SHELL("$TERM") },
+    { MODKEY|ShiftMask,             XK_Return, spawn,    SHELL("ls ~/.nix-profile/bin/ | dmenu -p ' Packages '|fish") },
     { MODKEY|ControlMask, 	   			XK_u, 		 spawn,    SHELL("maim | xclip -selection clipboard -t image/png")},
     { MODKEY, 											XK_u, 		 spawn,    SHELL("maim --select | xclip -selection clipboard -t image/png")},
     { 0, 														XF86MonBrightnessDown, spawn, SHELL("xbacklight -dec 2 && pkill -RTMIN+10 dwmblocks") },
