@@ -125,6 +125,7 @@ static const char *dmenucmd[] = { "dmenu_run", NULL }; //main launcher
 static Key keys[] = {
     /* modifier                     key        function        argument */
     { MODKEY,                       XK_c,      spawn,          SHELL("rofi -show run") },
+    { MODKEY, 				              XK_w,      spawn,          SHELL("walli") },
     { MODKEY|Mod1Mask,              XK_b,      spawn,          SHELL("$BROWSER") },
     { MODKEY|Mod1Mask,             	XK_i,      spawn,          TERM("e /home/creator54/.config/nixpkgs/wm/wm-configs/dwm/config.def.h") },
     { MODKEY|Mod1Mask,             	XK_n,      spawn,          TERM("nnn -cEFnQrux") },
