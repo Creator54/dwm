@@ -88,8 +88,6 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 static const Layout layouts[] = {
     /* symbol     arrange function */
     { "[M]",      monocle },
-    { "[]=",      tile },
-    { "===",      bstackhoriz }, // start format
     //{ "[@]",      spiral },
     //{ "[\\]",     dwindle },
     { "H[]",      deck },
@@ -99,6 +97,8 @@ static const Layout layouts[] = {
     //{ "---",      horizgrid },
     //{ ":::",      gaplessgrid },
     { "|M|",      centeredmaster },
+    { "===",      bstackhoriz }, // start format
+    { "[]=",      tile },
     //{ ">M>",      centeredfloatingmaster },
     //{ "|+|",      tatami },
     { "><>",      NULL },    /* no layout function means floating behavior */
