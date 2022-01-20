@@ -129,6 +129,7 @@ static Key keys[] = {
     { MODKEY|Mod1Mask,              XK_b,      spawn,          SHELL("$BROWSER") },
     { MODKEY|Mod1Mask,             	XK_i,      spawn,          TERM("e /home/creator54/.config/nixpkgs/wm/wm-configs/dwm/config.def.h") },
     { MODKEY|Mod1Mask,             	XK_n,      spawn,          TERM("nnn -cEFnQrux") },
+    { MODKEY|Mod1Mask,             	XK_w,      spawn,          SHELL("feh --bg-fill (sxiv -o -t $WALLPAPERS)") },
     { MODKEY|Mod1Mask,             	XK_k,      spawn,          SHELL("pkill screenkey") },
     { MODKEY|Mod1Mask,             	XK_a,      spawn,          SHELL("screenkey --no-systray -t 0.4 --opacity 0.0") },
     { MODKEY|Mod1Mask,             	XK_y,      spawn,          TERM("yt -y -l") },
