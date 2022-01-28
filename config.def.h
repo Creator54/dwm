@@ -132,6 +132,7 @@ static Key keys[] = {
 
   /* modifier                        key                       function        argument */
   { MODKEY,                          XK_c,                     spawn,          SHELL("rofi -show run") },
+  { MODKEY,                          XK_s,                     spawn,          TERM("dwmkeys") },
   { MODKEY,                          XK_w,                     spawn,          SHELL("walli") },
   { MODKEY|Mod1Mask,                 XK_b,                     spawn,          SHELL("$BROWSER") },
   { MODKEY|Mod1Mask,                 XK_i,                     spawn,          TERM("e /home/creator54/.config/nixpkgs/wm/wm-configs/dwm/config.def.h") },
