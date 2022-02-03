@@ -138,6 +138,7 @@ static Key keys[] = {
   { MODKEY|ShiftMask,                XK_v,                     spawn,          SHELL("brave") },
   { MODKEY|Mod1Mask,                 XK_r,                     spawn,          SHELL("v ~/Downloads/routine_rotated.pdf") },
   { MODKEY|ShiftMask,                XK_m,                     spawn,          TERM("read -P 'Enter man Query: ' query;man (echo $query)") },
+  { MODKEY|Mod1Mask,                 XK_h,                     spawn,          TERM("htop") },
   { MODKEY|Mod1Mask,                 XK_i,                     spawn,          TERM("e /home/creator54/.config/nixpkgs/wm/wm-configs/dwm/config.def.h") },
   { MODKEY|Mod1Mask,                 XK_n,                     spawn,          TERM("nnn -cEFnQrux") },
   { MODKEY|ShiftMask,                XK_s,                     spawn,          TERM("ssh $SERVER -i ~/.ssh/webserver") },
