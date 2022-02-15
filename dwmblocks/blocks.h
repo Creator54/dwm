@@ -4,8 +4,8 @@ static const Block blocks[] = {
   {"^c#3b414d^^c#7aa2f7^"   	, "fish -c 'net wlp3s0'"   			            , 		1, 			  0},
   //is slow to update
   //{"^c#3b414d^^c#7aa2f7^ "   , "printf '%s USDT\n' $(curl -s rate.sx/1btc | cut -d '.' -f1)"   			  , 		5, 			  0},
-  {"^c#3b414d^^c#7aa2f7^"       , "fish -c 'audio'"   					        , 		0, 			 11},
-  {"^c#3b414d^^b#7ec7a2^ "      , "fish -c 'battery fancy|cut -d':' -f1,2,3'"   , 		1, 			  0},
+  {"^c#3b414d^^c#7aa2f7^"       , "fish -c 'audio'"   					        , 		2, 			  0},
+  {"^c#3b414d^^b#7ec7a2^ "      , "fish -c 'battery fancy|cut -d':' -f1,2,3'"   , 		2, 			  0},
   {"^c#1e222a^^b#70A1C1^  "    , "echo $(light|cut -d'.' -f1)%"                , 		0, 			 10}, //this signal is used as pkill -RTMIN+10 dwmblocks
   {"^c#3b414d^^b#7ec7a2^  "    , "echo $(free -h|awk '/^Mem/{print $3}')B"     , 		2, 			  0},
   {"^c#1e222a^^b#70A1C1^  "    , "fish -c cpu" 						        , 		2, 			  0},
