@@ -114,7 +114,7 @@ static const Layout layouts[] = {
 { MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
-#define SHELL(cmd) { .v = (const char*[]){ "fish", "-c", cmd, NULL } }
+#define SHELL(cmd) { .v = (const char*[]){ "fish","-c", cmd, NULL } }
 #define TERM(cmd) { .v = (const char*[]){ "kitty", "-e", "fish","-c", cmd, NULL } }
 
 /* commands */
@@ -142,7 +142,7 @@ static Key keys[] = {
   { MODKEY|Mod1Mask,                 XK_s,                     spawn,          TERM("v $DOCUMENTS/resources.md") },
   { MODKEY|ShiftMask,                XK_m,                     spawn,          TERM("read -P 'Enter man Query: ' query;man (echo $query)") },
   { MODKEY|Mod1Mask,                 XK_h,                     spawn,          TERM("htop") },
-  { MODKEY|Mod1Mask,                 XK_i,                     spawn,          TERM("e /home/creator54/.config/nixpkgs/wm/wm-configs/dwm/config.def.h") },
+  { MODKEY|Mod1Mask,                 XK_i,                     spawn,          TERM("e ~/dev/dwm/config.def.h") },
   { MODKEY|Mod1Mask,                 XK_n,                     spawn,          TERM("nnn -cEFnQrux") },
   { MODKEY|ShiftMask,                XK_s,                     spawn,          TERM("connect_me") },
   { MODKEY|Mod1Mask,                 XK_w,                     spawn,          SHELL("feh --bg-fill (sxiv -o -t $WALLPAPERS)") },
@@ -151,7 +151,7 @@ static Key keys[] = {
   { MODKEY|Mod1Mask,                 XK_y,                     spawn,          TERM("ytfzf -t -l --sort") },
   { MODKEY|Mod1Mask,                 XK_t,                     spawn,          SHELL("telegram-desktop") },
   { MODKEY|Mod1Mask,                 XK_e,                     spawn,          SHELL("headset") },
-  { MODKEY|ShiftMask,                XK_w,                     spawn,          SHELL("feh --bg-fill --randomize /home/creator54/wallpapers") },
+  { MODKEY|ShiftMask,                XK_w,                     spawn,          SHELL("feh --bg-fill --randomize $WALLPAPERS") },
   { MODKEY|ShiftMask,                XK_n,                     spawn,          SHELL("nmcli con up CoudBe") },
   { MODKEY|ShiftMask,                XK_b,                     spawn,          SHELL("bluetoothctl connect (btid); or $TERM -e fish -c 'sudo rfkill unblock all && sudo systemctl restart bluetooth'") },
   { MODKEY|ControlMask,              XK_r,                     spawn,          SHELL("reboot") },
@@ -160,7 +160,7 @@ static Key keys[] = {
   { MODKEY|ControlMask,              XK_h,                     spawn,          SHELL('betterlockscreen -l blur --time-format "%I:%M %p"') },
   { MODKEY,                          XK_l,                     spawn,          SHELL("betterlockscreen -l") },
   { MODKEY,                          XK_Return,                spawn,          SHELL("$TERM") },
-  { MODKEY|ShiftMask,                XK_Return,                spawn,          SHELL("ls ~/.nix-profile/bin/ | dmenu -p ' Packages '|fish") },
+  { MODKEY|ShiftMask,                XK_Return,                spawn,          SHELL("packages") },
   { MODKEY|ControlMask,              XK_u,                     spawn,          SHELL("maim | xclip -selection clipboard -t image/png")},
   { MODKEY,                          XK_u,                     spawn,          SHELL("maim --select | xclip -selection clipboard -t image/png")},
   //Screenshot types
