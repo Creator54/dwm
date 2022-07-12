@@ -153,7 +153,7 @@ static Key keys[] = {
   { MODKEY|Mod1Mask,                 XK_e,                     spawn,          SHELL("headset") },
   { MODKEY|ShiftMask,                XK_w,                     spawn,          SHELL("feh --bg-fill --randomize $WALLPAPERS") },
   { MODKEY|ShiftMask,                XK_n,                     spawn,          SHELL("nmcli con up CoudBe") },
-  { MODKEY|ShiftMask,                XK_b,                     spawn,          SHELL("bluetoothctl connect (btid); or $TERM -e fish -c 'sudo rfkill unblock all && sudo systemctl restart bluetooth'") },
+  { MODKEY|ShiftMask,                XK_b,                     spawn,          SHELL("bluetooth on;bluetoothctl connect (btid)") },
   { MODKEY|ControlMask,              XK_r,                     spawn,          SHELL("reboot") },
   { MODKEY|ControlMask,              XK_p,                     spawn,          SHELL("poweroff") },
   { MODKEY|ControlMask,              XK_h,                     spawn,          SHELL("systemctl hibernate")},
