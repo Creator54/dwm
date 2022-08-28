@@ -142,7 +142,7 @@ static Key keys[] = {
   { MODKEY|Mod1Mask,                 XK_s,                     spawn,          TERM("v $DOCUMENTS/resources.md") },
   { MODKEY|ShiftMask,                XK_m,                     spawn,          TERM("read -P 'Enter man Query: ' query;man (echo $query)") },
   { MODKEY|Mod1Mask,                 XK_h,                     spawn,          TERM("htop") },
-  { MODKEY|Mod1Mask,                 XK_i,                     spawn,          TERM("e ~/dev/dwm/config.def.h") },
+  { MODKEY|Mod1Mask,                 XK_i,                     spawn,          TERM("e ~/dwm/config.def.h") },
   { MODKEY|Mod1Mask,                 XK_n,                     spawn,          TERM("nnn -cEFnQrux") },
   { MODKEY|ShiftMask,                XK_s,                     spawn,          TERM("connect_me") },
   { MODKEY|Mod1Mask,                 XK_w,                     spawn,          SHELL("feh --bg-fill (sxiv -o -t $WALLPAPERS)") },
@@ -287,3 +287,6 @@ static Button buttons[] = {
   { ClkTabNext,                      0,                        Button1,        movestack,      { .i = +1 } },
   { ClkTabClose,                     0,                        Button1,        killclient,     {0} },
 };
+
+
+
