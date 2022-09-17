@@ -131,6 +131,7 @@ static Key keys[] = {
   TAGKEYS(                           XK_4,                                      3)
 
   /* modifier                        key                       function        argument */
+  { Mod1Mask,                        XK_Return,                spawn,          SHELL("cdev") },
   { MODKEY,                          XK_c,                     spawn,          SHELL("rofi -show run") },
   { MODKEY,                          XK_s,                     spawn,          TERM("fish -c (dwmkeys | xargs |awk -F '[()]' '{print $2}')") },
   { MODKEY,                          XK_w,                     spawn,          SHELL("walli") },
