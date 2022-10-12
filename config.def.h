@@ -132,6 +132,8 @@ static Key keys[] = {
 
   /* modifier                        key                       function        argument */
   { Mod1Mask,                        XK_Return,                spawn,          SHELL("cdev") },
+  { MODKEY,                          XK_e,                     spawn,          TERM("e ~/.config/nixpkgs/home.nix") },
+  { MODKEY,                          XK_m,                     spawn,          SHELL("play_classical") },
   { MODKEY,                          XK_c,                     spawn,          SHELL("rofi -show run") },
   { MODKEY,                          XK_s,                     spawn,          TERM("fish -c (dwmkeys | xargs |awk -F '[()]' '{print $2}')") },
   { MODKEY,                          XK_w,                     spawn,          SHELL("walli") },
@@ -147,6 +149,7 @@ static Key keys[] = {
   { Mod1Mask,                        XK_p,                     spawn,          SHELL("picomSwitch") },
   { MODKEY|Mod1Mask,                 XK_n,                     spawn,          TERM("nnn -cEFnQrux") },
   { MODKEY|ShiftMask,                XK_s,                     spawn,          TERM("connect_me") },
+  { Mod1Mask,                        XK_s,                     spawn,          SHELL("feh --bg-fill (sxiv -o -t ~/Screenshots/)") },
   { Mod1Mask,                        XK_w,                     spawn,          SHELL("feh --bg-fill (sxiv -o -t $WALLPAPERS)") },
   { MODKEY|Mod1Mask,                 XK_k,                     spawn,          SHELL("pkill screenkey") },
   { MODKEY|Mod1Mask,                 XK_a,                     spawn,          SHELL("screenkey --no-systray -t 0.4 --opacity 0.0") },
