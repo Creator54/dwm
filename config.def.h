@@ -161,7 +161,7 @@ static Key keys[] = {
   { MODKEY|ShiftMask,                XK_b,                     spawn,          SHELL("bluetooth on;bluetoothctl connect (btid)") },
   { MODKEY|ControlMask,              XK_r,                     spawn,          SHELL("reboot") },
   { MODKEY|ControlMask,              XK_p,                     spawn,          SHELL("poweroff") },
-  { MODKEY|ControlMask,              XK_h,                     spawn,          SHELL("systemctl hibernate")},
+  { MODKEY|ControlMask,              XK_h,                     spawn,          SHELL("systemctl hybrid-sleep")},
   { MODKEY|ControlMask,              XK_h,                     spawn,          SHELL('betterlockscreen -l blur --time-format "%I:%M %p"') },
   { MODKEY,                          XK_l,                     spawn,          SHELL("betterlockscreen -l") },
   { MODKEY,                          XK_Return,                spawn,          SHELL("$TERM") },
@@ -185,8 +185,8 @@ static Key keys[] = {
   { 0,                               XF86XK_AudioRaiseVolume,  spawn,          SHELL("amixer set Master 10%+ && pkill -RTMIN+11 dwmblocks") },
 
   //Brightness Management
-  { 0, 								 XF86MonBrightnessDown,    spawn,         SHELL("xbacklight -dec 2 && pkill -RTMIN+10 dwmblocks") },
-  { 0, 								 XF86MonBrightnessUp,      spawn,         SHELL("xbacklight -inc 2 && pkill -RTMIN+10 dwmblocks") },
+  { 0, 								 XF86MonBrightnessDown,    spawn,         SHELL("light -U 10 && pkill -RTMIN+10 dwmblocks") },
+  { 0, 								 XF86MonBrightnessUp,      spawn,         SHELL("light -A 10 && pkill -RTMIN+10 dwmblocks") },
 
   { MODKEY,                          XK_b,                     togglebar,      {0} },
   { MODKEY|ControlMask,              XK_w,                     tabmode,        { -1 } },
