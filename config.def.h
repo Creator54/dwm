@@ -115,6 +115,7 @@ static const Layout layouts[] = {
 
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHELL(cmd) { .v = (const char*[]){ "fish","-c", cmd, NULL } }
+#define RUN(cmd) { .v = (const char*[]){ cmd, NULL } }
 #define TERM(cmd) { .v = (const char*[]){ "kitty", "-e", "fish","-c", cmd, NULL } }
 
 /* commands */
@@ -165,7 +166,7 @@ static Key keys[] = {
   { MODKEY|ControlMask,              XK_h,                     spawn,          SHELL('betterlockscreen -l blur --time-format "%I:%M %p"') },
   { MODKEY,                          XK_l,                     spawn,          SHELL("betterlockscreen -l") },
   { MODKEY,                          XK_Return,                spawn,          SHELL("$TERM") },
-  { MODKEY|ShiftMask,                XK_Return,                spawn,          SHELL("packages") },
+  { MODKEY|ShiftMask,                XK_Return,                spawn,          RUN("packages") },
   { MODKEY|ControlMask,              XK_u,                     spawn,          SHELL("maim | xclip -selection clipboard -t image/png")},
   { MODKEY,                          XK_u,                     spawn,          SHELL("maim --select | xclip -selection clipboard -t image/png")},
   //Screenshot types
