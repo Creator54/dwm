@@ -16,7 +16,7 @@ static const unsigned int systraypinning    = 0;   /* 0: sloppy systray follows 
 static const unsigned int systrayspacing    = 2;   /* systray spacing */
 static const int systraypinningfailfirst    = 1;   /* 1: if pinning fails,display systray on the 1st monitor,False: display systray on last monitor*/
 static const int showsystray                = 1;     /* 0 means no systray */
-static const int showbar                    = 1;        /* 0 means no bar */
+static const int showbar                    = 0;        /* 0 means no bar */
 enum showtab_modes { showtab_never, showtab_auto, showtab_nmodes, showtab_always };
 static const int showtab                    = showtab_auto;
 static const int toptab                     = 0;
@@ -56,7 +56,7 @@ static const char *colors[][3] = {
 };
 
 /* tagging */
-static char *tags[] = {" ", " ", " ", " "};
+static char *tags[] = {" 1 ", " 2 ", " 3 ", " 4 ", " 5 "};
 
 static const int tagschemes[] = { SchemeTag1, SchemeTag2, SchemeTag3,SchemeTag4 };
 
@@ -130,6 +130,7 @@ static Key keys[] = {
   TAGKEYS(                           XK_2,                                      1)
   TAGKEYS(                           XK_3,                                      2)
   TAGKEYS(                           XK_4,                                      3)
+  TAGKEYS(                           XK_5,                                      4)
 
   /* modifier                        key                       function        argument */
   { Mod1Mask,                        XK_Return,                spawn,          SHELL("cdev") },
@@ -162,17 +163,18 @@ static Key keys[] = {
   { MODKEY|ShiftMask,                XK_b,                     spawn,          SHELL("bluetooth on;bluetoothctl connect (btid)") },
   { MODKEY|ControlMask,              XK_r,                     spawn,          SHELL("reboot") },
   { MODKEY|ControlMask,              XK_p,                     spawn,          SHELL("poweroff") },
-  { MODKEY|ControlMask,              XK_h,                     spawn,          SHELL("systemctl hybrid-sleep")},
+  { MODKEY|ControlMask,              XK_h,                     spawn,          SHELL("betterlockscreen -l; systemctl hybrid-sleep")},
   { MODKEY|ControlMask,              XK_h,                     spawn,          SHELL('betterlockscreen -l blur --time-format "%I:%M %p"') },
   { MODKEY,                          XK_l,                     spawn,          SHELL("betterlockscreen -l") },
   { MODKEY,                          XK_Return,                spawn,          SHELL("$TERM") },
+  { MODKEY|ShiftMask,                XK_n,                     spawn,          RUN("nautilus") },
   { MODKEY|ShiftMask,                XK_Return,                spawn,          RUN("packages") },
   { MODKEY|ControlMask,              XK_u,                     spawn,          SHELL("maim | xclip -selection clipboard -t image/png")},
   { MODKEY,                          XK_u,                     spawn,          SHELL("maim --select | xclip -selection clipboard -t image/png")},
   //Screenshot types
   { 0,                               XK_Print,                 spawn,          SHELL("flameshot full -p ~/Screenshots/") },
   { MODKEY,                          XK_Print,                 spawn,          SHELL("flameshot gui -p ~/Screenshots/") },
-  { MODKEY|ShiftMask,                XK_Print,                 spawn,          SHELL("flameshot full -c") },
+  { MODKEY|ShiftMask,                XK_Print,                 spawn,          SHELL("flameshot gui -c") },
 
   //Gromit-mpx: write on screen
   { MODKEY,                          XK_x,                     spawn,          SHELL("pkill gromit-mpx;or gromit-mpx -a") },
