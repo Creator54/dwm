@@ -147,7 +147,7 @@ static Key keys[] = {
   { MODKEY|Mod1Mask,                 XK_s,                     spawn,          TERM("v $DOCUMENTS/resources.md") },
   { MODKEY|ShiftMask,                XK_m,                     spawn,          TERM("read -P 'Enter man Query: ' query;man (echo $query)") },
   { MODKEY|Mod1Mask,                 XK_h,                     spawn,          TERM("htop") },
-  { MODKEY|Mod1Mask,                 XK_i,                     spawn,          TERM("edwm") },
+  { MODKEY|Mod1Mask,                 XK_i,                     spawn,          SHELL("edwm") },
   { Mod1Mask,                        XK_p,                     spawn,          SHELL("picomSwitch") },
   { MODKEY,                          XK_Return,                spawn,          TERM("nnn -cndeHFnQrux") },
   { MODKEY|ShiftMask,                XK_s,                     spawn,          TERM("connect_me") },
