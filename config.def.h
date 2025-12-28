@@ -164,7 +164,7 @@ static Key keys[] = {
   { MODKEY|ControlMask,              XK_r,                     spawn,          SHELL("reboot") },
   { MODKEY|ControlMask,              XK_p,                     spawn,          SHELL("poweroff") },
   { MODKEY|ControlMask,              XK_h,                     spawn,          SHELL("betterlockscreen -l; systemctl hybrid-sleep")},
-  { MODKEY|ControlMask,              XK_h,                     spawn,          SHELL('betterlockscreen -l blur --time-format "%I:%M %p"') },
+  { MODKEY|ControlMask,              XK_h,                     spawn,          SHELL("betterlockscreen -l blur") },
   { MODKEY,                          XK_l,                     spawn,          SHELL("betterlockscreen -l") },
   { MODKEY|Mod1Mask,                 XK_Return,                spawn,          SHELL("$TERM") },
   { MODKEY|ShiftMask,                XK_n,                     spawn,          RUN("nautilus") },
